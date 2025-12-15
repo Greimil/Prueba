@@ -1,78 +1,187 @@
-Instrucciones para correr los dos proyectos
+# Instrucciones para ejecutar los proyectos
 
-Ambos proyectos fueron desarrollados en JavaScript, específicamente TypeScript, tanto en el frontend como en el backend. La base de datos utilizada es SQLite, manejada con Prisma como ORM.
-A continuación se detallan los pasos para ejecutar ambos proyectos:
+Este repositorio contiene **dos proyectos independientes**: un **frontend** y un **backend**.
 
-Clonar este repositorio.
+Ambos fueron desarrollados en **JavaScript con TypeScript**, tanto del lado del cliente como del servidor. La base de datos utilizada es **SQLite**, gestionada mediante **Prisma** como ORM.
 
-Moverse a la carpeta raíz de cada proyecto (frontend y backend).
+---
 
-Dentro de cada carpeta, ejecutar:
+## Requisitos previos
 
-npm i (para instalar todas las dependencias necesarias).
+Antes de comenzar, asegúrate de tener instalado:
 
-Verificar los puertos de ejecución:
+- Node.js
+- npm
 
-Vite suele correr en el 5173.
+---
 
-El backend corre en el 3080 por defecto.
+## Pasos para ejecutar los proyectos
 
+### 1. Clonar el repositorio
 
-Si el frontend usa un puerto distinto al 5173, modificar el archivo app.ts (ruta: backend/src/app.ts) y colocar el puerto correcto para evitar problemas de CORS.
+Clona este repositorio en tu máquina local.
 
-Dentro de la carpeta backend: npx prisma generate (para generar el codigo boilerplate de la BBDD)
+---
 
-El backend cuenta con un endpoint principal:
-http://localhost:3080/api/cards
+### 2. Instalar dependencias
 
-Desde este endpoint se pueden ejecutar todos los métodos CRUD.
+Debes realizar este paso **en ambos proyectos**.
 
-Para el método GET, puedes enviar opcionalmente dos parámetros para filtrar datos: id y cardHolder.
-Si no se envía ninguno, se retorna toda la data almacenada.
+1. Navega a la carpeta raíz del **frontend**.
+2. Ejecuta:
 
-Tanto PUT como DELETE requieren enviar el id en la URL. Ejemplo:
+```bash
+npm i
+```
 
-PUT http://localhost:3080/api/cards/1
+3. Repite el mismo procedimiento en la carpeta raíz del **backend**.
 
+---
 
-Para realizar un PUT, es necesario enviar en el body los campos a actualizar y usar el header:
+### 3. Configuración de puertos
 
-Content-Type: application/json
+- El **frontend**, al usar Vite, suele ejecutarse en el puerto **5173**.
+- El **backend** se ejecuta por defecto en el puerto **3080**.
 
+Si el frontend se ejecuta en un puerto distinto al **5173**, debes actualizar el archivo:
 
-(Por ejemplo, si se prueba con Postman).
+```
+backend/src/app.ts
+```
 
-Finalmente, para correr los proyectos ejecutar:
+Coloca allí el puerto correcto del frontend para evitar problemas de **CORS**.
 
+---
+
+### 4. Generar el cliente de Prisma
+
+Desde la carpeta **backend**, ejecuta:
+
+```bash
+npx prisma generate
+```
+
+Este comando genera el código necesario para interactuar con la base de datos.
+
+---
+
+### 5. Ejecutar los proyectos
+
+En cada proyecto (frontend y backend), ejecuta:
+
+```bash
 npm run dev
+```
 
-Estructura del proyecto
+---
 
-El proyecto contiene dos carpetas principales:
+## Backend
 
-frontend
+### Descripción general
 
-Desarrollado con React, TypeScript, TailwindCSS y Lucide React.
+El backend está construido con:
 
-La mayor parte de la lógica está en un solo archivo para facilitar el seguimiento.
+- Node.js
+- Express
+- TypeScript
+- Prisma como ORM
+- SQLite como base de datos
 
-Para validaciones y llamadas a la API existe un archivo adicional: aux.tsx.
+Se recomienda utilizar **DB Browser for SQLite** (u otra herramienta similar) para visualizar el contenido de la base de datos.
 
-Actualmente el frontend usa los métodos GET y POST.
+---
 
-GET funciona desde el backend, pero por temas de tiempo no se logró renderizar el resultado en pantalla.
+### Endpoints disponibles
 
-POST crea nuevas cards.
+La API expone un único endpoint principal:
 
-Los métodos PUT y DELETE están implementados en aux.tsx, aunque no integrados en la UI.
+```
+http://localhost:3080/api/cards
+```
 
-backend
+Desde este endpoint se pueden ejecutar todas las operaciones **CRUD**.
 
-Usa Prisma como ORM, SQLite como base de datos y Express con TypeScript sobre Node.js.
+#### GET
 
-Se recomienda usar DB Browser for SQLite u otra herramienta similar para visualizar la base de datos.
+- Permite obtener todas las cards almacenadas.
+- Acepta opcionalmente los siguientes parámetros de consulta para filtrar resultados:
+  - `id`
+  - `cardHolder`
 
-La API expone un único endpoint con diferentes métodos HTTP.
+Si no se envía ningún parámetro, se retorna toda la información disponible.
 
-La estructura está pensada de forma modular: routers, services, controllers, etc.
+#### POST
+
+- Crea una nueva card.
+
+#### PUT
+
+- Requiere enviar el `id` en la URL.
+
+Ejemplo:
+
+```
+PUT http://localhost:3080/api/cards/1
+```
+
+- En el body se deben enviar los campos a actualizar.
+- Es obligatorio incluir el header:
+
+```
+Content-Type: application/json
+```
+
+#### DELETE
+
+- Requiere enviar el `id` en la URL, de forma similar al método PUT.
+
+---
+
+### Estructura del backend
+
+La estructura del backend está organizada de forma modular, separando responsabilidades en:
+
+- Routers
+- Controllers
+- Services
+
+---
+
+## Frontend
+
+### Descripción general
+
+El frontend fue desarrollado con:
+
+- React
+- TypeScript
+- TailwindCSS
+- Lucide React
+
+La mayor parte de la lógica se encuentra concentrada en un solo archivo, con el objetivo de facilitar el seguimiento del flujo de la aplicación.
+
+Existe un archivo adicional llamado `aux.tsx` que se encarga de:
+
+- Validaciones
+- Llamadas a la API
+
+---
+
+### Funcionalidad actual
+
+- El frontend utiliza actualmente los métodos **GET** y **POST**.
+- El método **GET** funciona correctamente desde el backend, pero por limitaciones de tiempo no se logró renderizar la información en pantalla.
+- El método **POST** permite crear nuevas cards.
+- Los métodos **PUT** y **DELETE** están implementados en `aux.tsx`, pero aún no están integrados en la interfaz de usuario.
+
+---
+
+## Estructura general del proyecto
+
+El repositorio contiene dos carpetas principales:
+
+- `frontend`
+- `backend`
+
+Cada una debe ejecutarse de forma independiente siguiendo los pasos descritos anteriormente.
 
