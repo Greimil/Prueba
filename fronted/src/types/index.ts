@@ -25,13 +25,13 @@ export interface UpdateCardData {
 }
 
 export interface CardDetail {
-  id: string;
+  Id: string;
   cardHolder: string;
   expDate: string;
+  cardNumber: string;
 }
 
 export interface CardQuery {
   id?: string;
   cardHolder?: string;
 }
-

@@ -1,17 +1,13 @@
-
-import Form from './components/form'
-
+import Form from "./components/form";
+import CardSelection from "./components/CardSelection";
 
 function App() {
-
-
   return (
-    <>
-
-     <Form/>
-
-    </>
-  )
+    <div className="" >
+      <Form />
+      <CardSelection />
+    </div>
+  );
 }
 
-export default App
+export default App;

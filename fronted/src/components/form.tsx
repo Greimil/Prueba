@@ -8,9 +8,7 @@ import {
   validateExpDate,
   encryptCardNumber,
   PostCard,
-  fetchDataInit,
-} from "./aux";
-
+} from "./helper";
 import { type CardBody, type form } from "../types/index";
 
 const Form = () => {
@@ -20,8 +18,6 @@ const Form = () => {
     cardHolder: { value: "", error: "" },
     cvv: { value: "", error: "" },
   });
-
-  const [cardsArr, setCardsArr] = useState<CardBody[]>([]);
 
   const cvvRef = useRef<HTMLInputElement>(null);
   const cardHolderRef = useRef<HTMLInputElement>(null);
@@ -136,26 +132,34 @@ const Form = () => {
     });
   };
 
-  useEffect(() => {
-    fetchDataInit(setCardsArr);
-  }, []);
-
   return (
-    <div className="w-full flex  justify-center flex-col">
-      <div className="flex flex-col  items-center m-20">
+    <div className=" min-h-screen flex justify-center  px-4 sm:px-6 lg:px-10 w-full ">
+      <div
+        className="
+        w-full max-w-6xl
+        flex flex-col
+        items-center
+        lg:gap-x-16
+        py-12 lg:py-20
+      "
+      >
         <Card
           cardHolder={form.cardHolder.value}
           cardNumber={form.cardNumber.value}
-          cvv={form.cvv.value}
           expDate={form.expDate.value}
+          showOptions={false}
         />
+
         <form
           onSubmit={handleSubmit}
-          action=""
           method="post"
-          className="max-w-[760px] border-collapse rounded-lg mx-auto border relative p-12 aspect-video"
+          className="
+          w-full max-w-[660px]
+          border rounded-xl
+          p-6 lg:p-12
+          pt-15"
         >
-          <div className="mt-6 space-y-6 grid grid-cols-2 gap-6 px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Input
               id="cardNum"
               name="cardNum"
@@ -190,26 +194,33 @@ const Form = () => {
               errorMs={form.cardHolder.error}
               onChange={handleCardHolder}
               max={20}
+              className="md:col-span-2"
             />
 
             <Input
               ref={cvvRef}
               id="cvv"
               name="cvv"
-              label="cvv"
+              label="CVV"
               type="text"
               placeholder="432"
-              className="max-w-[150px]"
+              className="max-w-40"
               errorMs={form.cvv.error}
               onChange={handleCVV}
               max={3}
             />
 
-            <div className="flex gap-x-3.5 col-span-2">
+            <div className="flex flex-col sm:flex-row gap-4 md:col-span-2 pt-4">
               <button
                 type="submit"
-                onClick={handleSubmit}
-                className="btn bg-blue-600 hover:bg-blue-800 text-white px-4 py-2 rounded-2xl cursor-pointer transition-all ease-in"
+                className="
+                btn
+                bg-blue-600 hover:bg-blue-800
+                text-white
+                px-6 py-2.5
+                rounded-2xl
+                transition-all
+              "
               >
                 Agregar tarjeta
               </button>
@@ -217,7 +228,15 @@ const Form = () => {
               <button
                 type="button"
                 onClick={handleErase}
-                className="px-4 py-2 rounded-2xl bg-[#efefef] font-bold text-[#5853536e] hover:text-black transition-all ease-in"
+                className="
+                px-6 py-2.5
+                rounded-2xl
+                bg-[#efefef]
+                font-semibold
+                text-gray-500
+                hover:text-black
+                transition-all
+              "
               >
                 Cancelar
               </button>
@@ -225,26 +244,6 @@ const Form = () => {
           </div>
         </form>
       </div>
-
-      {/* <div className="w-full flex  justify-center flex-col">
-
-        <h2>Mis tarejetas</h2>
-
-        <ul className="mt-10 space-y-4 max-w-[760px] mx-auto w-full">
-          {cardsArr.map((card) => (
-            <li key={card.cardNumber} className="w-full">
-              <Card
-                cardHolder={card.cardHolder}
-                cardNumber={card.cardNumber.split(/(?<=.{4})/)}
-                cvv={card.cvv}
-                expDate={card.expDate}
-              />
-            </li>
-          ))}
-        </ul>
-
-
-      </div> */}
     </div>
   );
 };

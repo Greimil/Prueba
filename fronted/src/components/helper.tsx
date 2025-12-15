@@ -63,7 +63,7 @@ export const encryptCardNumber = (cardNumber: string): string => {
 
 const BaseURL = "http://localhost:3080/api/cards";
 
-export const GetCards = async (query: CardQuery = {}): Promise<CardBody[]> => {
+export const GetCards = async (query: CardQuery = {}): Promise<CardDetail[]> => {
   try {
     const { id, cardHolder } = query;
     let url = BaseURL;
@@ -91,7 +91,7 @@ export const GetCards = async (query: CardQuery = {}): Promise<CardBody[]> => {
       throw new Error(`Error al obtener tarjetas: ${res.status}`);
     }
 
-    const data: CardBody[] = await res.json();
+    const data: CardDetail[] = await res.json();
     return data;
   } catch (err) {
     console.error(`Error al intentar hacer GET a la API:`, err);
@@ -120,7 +120,7 @@ export const PostCard = async (data: CardBody) => {
   }
 };
 
-const DeleteCard = async (id: string) => {
+export const DeleteCard = async (id: string) => {
   try {
     const url = `${BaseURL}/${id}`;
 
@@ -160,17 +160,5 @@ const PutCard = async (id: string, data: UpdateCardData) => {
   } catch (err) {
     console.error(`Error al intentar actualizar la tarjeta con ID ${id}`);
     throw err;
-  }
-};
-
-export const fetchDataInit = async (
-  setCards: React.Dispatch<React.SetStateAction<CardBody[]>>,
-) => {
-  try {
-    const res = await GetCards({});
-
-    setCards(res);
-  } catch (err) {
-    console.error("Error al intentar hacer fetch a las cards:", err);
   }
 };
