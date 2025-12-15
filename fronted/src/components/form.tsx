@@ -9,9 +9,13 @@ import {
   encryptCardNumber,
   PostCard,
 } from "./helper";
-import { type CardBody, type form } from "../types/index";
+import { type CardBody, type form, type UpdateCardData } from "../types/index";
 
-const Form = () => {
+type FromType = {
+  selectedCard?: UpdateCardData | undefined;
+};
+
+const Form = ({ selectedCard }: FromType) => {
   const [form, setForm] = useState<form>({
     cardNumber: { value: [], error: "" },
     expDate: { value: "", error: "" },
@@ -144,9 +148,9 @@ const Form = () => {
       "
       >
         <Card
-          cardHolder={form.cardHolder.value}
-          cardNumber={form.cardNumber.value}
-          expDate={form.expDate.value}
+          cardHolder={selectedCard?.cardHolder ?? form.cardHolder.value}
+          cardNumber={selectedCard?.cardNumber ?? form.cardNumber.value}
+          expDate={selectedCard?.expDate?? form.expDate.value}
           showOptions={false}
         />
 

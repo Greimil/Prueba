@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
 import { GetCards } from "./helper";
-import { type CardDetail } from "../types";
+import { type CardDetail, type UpdateCardData } from "../types";
 import Card from "./card";
 import { DeleteCard } from "./helper";
 
-const CardSelection = () => {
+type CardSelectionType = {
+
+  
+  Selectfn?: React.Dispatch<React.SetStateAction<UpdateCardData | undefined>>
+}
+
+
+const CardSelection = ({Selectfn}:CardSelectionType) => {
   const [cards, setCards] = useState<CardDetail[]>([]);
 
   useEffect(() => {
@@ -35,7 +42,6 @@ const CardSelection = () => {
   }
 };
 
-
   return (
     <div className="flex flex-col justify-center items-center  w-full ">
       <h3 className="font-bold text-2xl pb-8">Mis tarjetas</h3>
@@ -45,9 +51,11 @@ const CardSelection = () => {
             <Card
               key={cardInfo.Id}
               cardHolder={cardInfo.cardHolder}
-              cardNumber={cardInfo.cardHolder.split(/(?<=.{4})/)}
+              cardNumber={cardInfo.cardNumber.match(/.{4}/g)!}
               expDate={cardInfo.expDate}
               onDelete={() => handleDeleteCard(cardInfo.Id)}
+              onSelect={()=> Selectfn!({...cardInfo})}
+
             />
           ))}
       </div>

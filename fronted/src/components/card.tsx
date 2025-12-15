@@ -7,9 +7,10 @@ type CardProps = {
   cardHolder: string;
   showOptions?: boolean 
   onDelete?: () => void;
+  onSelect?: ()=> void
 };
 
-const Card = ({ cardHolder, expDate, cardNumber, showOptions = true , onDelete}: CardProps) => {
+const Card = ({ cardHolder, expDate, cardNumber, showOptions = true , onDelete, onSelect}: CardProps) => {
   return (
     
     <div
@@ -47,7 +48,7 @@ const Card = ({ cardHolder, expDate, cardNumber, showOptions = true , onDelete}:
           <button 
             className="p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
             title="Editar tarjeta"
-            onClick={() => console.log("Editar")}
+            onClick={() => onSelect!()}
           >
             <Pencil className="size-5" />
           </button>

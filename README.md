@@ -9,10 +9,7 @@ Moverse a la carpeta raíz de cada proyecto (frontend y backend).
 
 Dentro de cada carpeta, ejecutar:
 
-npm i
-
-
-para instalar todas las dependencias necesarias.
+npm i (para instalar todas las dependencias necesarias).
 
 Verificar los puertos de ejecución:
 
@@ -20,7 +17,10 @@ Vite suele correr en el 5173.
 
 El backend corre en el 3080 por defecto.
 
+
 Si el frontend usa un puerto distinto al 5173, modificar el archivo app.ts (ruta: backend/src/app.ts) y colocar el puerto correcto para evitar problemas de CORS.
+
+Dentro de la carpeta backend: npx prisma generate (para generar el codigo boilerplate de la BBDD)
 
 El backend cuenta con un endpoint principal:
 http://localhost:3080/api/cards

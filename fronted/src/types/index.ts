@@ -18,6 +18,7 @@ export interface CardBody {
 }
 
 export interface UpdateCardData {
+  Id?: string
   cardHolder?: string;
   cvv?: string;
   expDate?: string;
@@ -29,6 +30,7 @@ export interface CardDetail {
   cardHolder: string;
   expDate: string;
   cardNumber: string;
+  cvv: string
 }
 
 export interface CardQuery {
