@@ -160,7 +160,7 @@ El frontend fue desarrollado con:
 
 La mayor parte de la lógica se encuentra concentrada en un solo archivo, con el objetivo de facilitar el seguimiento del flujo de la aplicación.
 
-Existe un archivo adicional llamado `aux.tsx` que se encarga de:
+Existe un archivo adicional llamado `helper.tsx` que se encarga de:
 
 - Validaciones
 - Llamadas a la API
@@ -173,7 +173,7 @@ Existe un archivo adicional llamado `aux.tsx` que se encarga de:
 - El método **GET** funciona correctamente desde el backend, pero por limitaciones de tiempo no se logró renderizar la información en pantalla.
 - El método **POST** permite crear nuevas cards.
 - El meotdo **DELETE** permite eliminar una card, solo es necesario pasar el click sobre la card deseada (en la seccion mis tarjetas) y hacer click en el icono de eliminar
-- El métodos **PUT** esta implementados en `aux.tsx`, pero aún no está integrado en la interfaz de usuario.
+- El métodos **PUT** esta implementados en `helper.tsx`, pero aún no está integrado en la interfaz de usuario.
 
 ---
 
