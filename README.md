@@ -169,10 +169,11 @@ Existe un archivo adicional llamado `aux.tsx` que se encarga de:
 
 ### Funcionalidad actual
 
-- El frontend utiliza actualmente los métodos **GET** y **POST**.
+- El frontend utiliza actualmente los métodos **GET**, **POST**  y **DELETE**.
 - El método **GET** funciona correctamente desde el backend, pero por limitaciones de tiempo no se logró renderizar la información en pantalla.
 - El método **POST** permite crear nuevas cards.
-- Los métodos **PUT** y **DELETE** están implementados en `aux.tsx`, pero aún no están integrados en la interfaz de usuario.
+- El meotdo **DELETE** permite eliminar una card, solo es necesario pasar el click sobre la card deseada (en la seccion mis tarjetas) y hacer click en el icono de eliminar
+- El métodos **PUT** esta implementados en `aux.tsx`, pero aún no está integrado en la interfaz de usuario.
 
 ---
 
